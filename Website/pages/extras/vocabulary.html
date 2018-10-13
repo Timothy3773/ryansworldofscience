@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ryan's World of Science - Vocabulary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="C:\Users\Admin\Desktop\Development\HTML\ScienceForDays\Website\css/bulma.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<body>
+  <div class="tabs is-dark is-medium">
+      <ul>
+          <li><a href="C:\Users\Admin\Desktop\Development\HTML\ScienceForDays\Website\index.html"><i class="fa fa-home"></i>Home</a></li>
+          <li><a href="../chapters.html"><i class="fa fa-book"></i>Chapters</a></li>
+          <li><a href="../extra.html"><i class="fa fa-list"></i>Extra</a></li>
+      </ul>
+  </div>
+  <h1 class="title is-1 has-text-centered"><span class="title" style="font-size: 60px; color: rgb(0, 162, 255);">{</span> Vocabulary <span class="title" style="font-size: 60px; color: rgb(0, 162, 255);">}</span></h1>
+  <br>
+  <center>
+    <div class="hero is-dark has-text-centered" style="width: 600px; border-radius: 10px; border-bottom: none;">
+        <div class="hero-body">
+            <h1 class="title is-2">The Vocabulary...</h1>
+            <p class="title is-5">Source: <a style="text-decoration: underline;" onmouseover="this.style.color = 'rgb(0, 162, 255)'" onmouseout="this.style.color =this.style.color = 'white'" href="https://www.Wikipedia.com">Wikipedia</a></p>
+            <p style="font-size: 20px;">The vocabulary will tell you about the scientific term you're trying to find. Just click on a word and boom.</p>
+        </div>
+    </div>
+    <div class="hero is-dark has-text-centered" style="width: 1000px; border-radius: 10px; border-top: none; margin-block-start: -20px;">
+        <div class="hero-body is-medium">
+            <div class="breadcrumb is-large">
+                <ul id="list">
+                    
+                </ul>
+            </div>
+            <p id="result" class="title is-5 has-text-centered">The definition will appear here ;)</p>
+        </div>
+    </div>
+
+  </center>
+
+  <!--Below is the script to make life easier-->
+<script>
+let list = document.getElementById("list");
+let words = ["Cell","Mitosis", "Meiosis", "Chromosome","Astronomical unit"]
+words.forEach((xd) => {
+    let li = document.createElement("li")
+    li.innerText = xd.trim().toString()
+    li.style.userSelect = "text";
+    let link = document.createElement("a")
+    link.href = "C:\\Users\\Admin\\Desktop\\Development\\HTML\\ScienceForDays\\Website\\pages\\extras\\vocab\\" + xd.split(" ")[0]
+    fetch("https://raw.githubusercontent.com/Timothy3773/sciencewords/master/" + xd.toLowerCase()).then(txt => {
+       txt.text().then(ok => {
+            li.title = ok.toString().trim()
+        })
+    })
+    li.appendChild(link)
+    list.appendChild(li)
+    li.addEventListener("click", () => {
+        fetch("https://raw.githubusercontent.com/Timothy3773/sciencewords/master/" + xd.toLowerCase()).then(txt => {
+       txt.text().then(ok => {
+        document.getElementById('result').innerText =  ok.toString()
+        })
+    })
+       
+    })
+})
+</script>
+</body>
+</html>
